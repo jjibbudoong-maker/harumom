@@ -24,6 +24,7 @@ export default function SettingsPage() {
         </svg>
       ),
       href: '/onboarding/profile',
+      color: 'bg-ap-blue-lt text-ap-blue',
     },
     {
       label: '증상 관리', sub: '추적 중인 증상 목록',
@@ -33,6 +34,7 @@ export default function SettingsPage() {
         </svg>
       ),
       href: '/settings/symptoms',
+      color: 'bg-ap-teal-lt text-ap-teal',
     },
     {
       label: '약물 관리', sub: '복용 중인 약물 목록',
@@ -42,6 +44,18 @@ export default function SettingsPage() {
         </svg>
       ),
       href: '/settings/medications',
+      color: 'bg-ap-amber-lt text-ap-amber',
+    },
+    {
+      label: '알림 설정', sub: '기록 리마인더 & 복약 알림',
+      icon: (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+          <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+        </svg>
+      ),
+      href: '/settings/notifications',
+      color: 'bg-ap-mint-pale text-ap-mint-deep',
     },
   ]
 
@@ -53,11 +67,11 @@ export default function SettingsPage() {
       </div>
 
       <div className="px-5 py-5 space-y-3">
-        {MENU_ITEMS.map(({ label, sub, icon, href }) => (
+        {MENU_ITEMS.map(({ label, sub, icon, href, color }) => (
           <button key={label} onClick={() => router.push(href)}
             className="w-full flex items-center justify-between bg-white rounded-2xl px-5 py-4 border border-ap-border text-left">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 bg-ap-blue-lt rounded-xl flex items-center justify-center text-ap-blue flex-shrink-0">
+              <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${color}`}>
                 {icon}
               </div>
               <div>
