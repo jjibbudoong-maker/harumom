@@ -6,24 +6,32 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  // JIT가 스캔 전에 반드시 생성할 클래스 목록
   safelist: [
-    'bg-ap-navy', 'bg-ap-blue', 'bg-ap-teal', 'bg-ap-red', 'bg-ap-amber',
-    'bg-ap-teal-lt', 'bg-ap-blue-lt', 'bg-ap-red-lt', 'bg-ap-amber-lt',
-    'bg-ap-surface', 'bg-ap-card',
-    'text-ap-navy', 'text-ap-blue', 'text-ap-teal', 'text-ap-red',
-    'text-ap-amber', 'text-ap-muted', 'text-ap-text',
-    'border-ap-blue', 'border-ap-teal', 'border-ap-border', 'border-ap-red',
+    // navy / blue / teal
+    'bg-ap-navy', 'bg-ap-blue', 'bg-ap-teal', 'bg-ap-teal-lt', 'bg-ap-blue-lt',
+    'text-ap-navy', 'text-ap-blue', 'text-ap-teal', 'text-ap-text', 'text-ap-muted',
+    'border-ap-blue', 'border-ap-teal', 'border-ap-border',
     'border-l-ap-teal', 'border-l-ap-blue', 'border-l-ap-amber', 'border-l-ap-red', 'border-l-ap-border',
     'accent-ap-blue', 'accent-ap-teal', 'accent-ap-red',
     'ring-ap-blue', 'focus:ring-ap-blue',
+    // red / amber
+    'bg-ap-red', 'bg-ap-red-lt', 'bg-ap-amber', 'bg-ap-amber-lt',
+    'text-ap-red', 'text-ap-amber', 'border-ap-red',
+    // surface
+    'bg-ap-surface', 'bg-ap-card',
+    // mint (로그인/회원가입 디자인)
+    'bg-ap-mint', 'bg-ap-mint-lt', 'bg-ap-mint-pale', 'bg-ap-mint-wash',
+    'text-ap-mint', 'text-ap-mint-deep',
+    'border-ap-mint', 'border-ap-mint-lt',
+    'ring-ap-mint', 'focus:ring-ap-mint',
+    'hover:bg-ap-mint-deep',
   ],
   theme: {
     extend: {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        // ── Apeuni Medical Design System ──
+        // ── 기존 Medical Design System ──
         "ap-navy":    "#0D2B45",
         "ap-blue":    "#1565C0",
         "ap-teal":    "#00695C",
@@ -38,8 +46,15 @@ const config: Config = {
         "ap-amber":   "#E65100",
         "ap-amber-lt":"#FFF3E0",
         "ap-text":    "#1A202C",
-        // legacy aliases
-        "apeuni-mint": "#00695C",
+        // ── 민트 시스템 (로그인/하루몸 디자인) ──
+        "ap-mint":      "#4CAF96",
+        "ap-mint-deep": "#36967E",
+        "ap-mint-press":"#2E8470",
+        "ap-mint-lt":   "#A5DDCB",
+        "ap-mint-pale": "#E6F4EF",
+        "ap-mint-wash": "#F3FAF7",
+        // legacy
+        "apeuni-mint": "#4CAF96",
         "apeuni-soft": "#E0F2F1",
         "apeuni-warn": "#E65100",
         "apeuni-bear": "#455A64",
