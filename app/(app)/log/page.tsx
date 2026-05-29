@@ -191,7 +191,6 @@ function WaterPicker({ value, onChange }: { value: string; onChange: (v: string)
 // ────────────── 신체 활동 ──────────────
 function ExercisePicker({ value, onChange }: { value: string; onChange: (v: string) => void }) {
   const minVal = parseInt(value) || 0
-  const _matched = EXERCISE_LEVELS.find(l => l.min === minVal)
   return (
     <div style={{ background: 'white', borderRadius: 16, padding: 16, border: `1px solid ${C.border}` }}>
       <p style={{ fontWeight: 700, fontSize: 14, color: C.text, margin: '0 0 2px' }}>신체 활동</p>
