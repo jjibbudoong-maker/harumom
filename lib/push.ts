@@ -2,13 +2,6 @@
 
 const VAPID_PUBLIC_KEY = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!;
 
-function urlBase64ToUint8Array(base64String: string): Uint8Array {
-  const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
-  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
-  const rawData = atob(base64);
-  return Uint8Array.from(rawData.split('').map((c) => c.charCodeAt(0)));
-}
-
 /** Service Worker 등록 (이미 등록된 경우 기존 것 반환) */
 export async function registerSW(): Promise<ServiceWorkerRegistration | null> {
   if (!('serviceWorker' in navigator)) return null;
@@ -33,7 +26,7 @@ export async function subscribePush(): Promise<PushSubscription | null> {
   try {
     return await registration.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
+      applicationServerKey: VAPID_PUBLIC_KEY,
     });
   } catch (err) {
     console.error('[Push] 구독 실패:', err);
