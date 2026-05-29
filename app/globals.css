@@ -3,25 +3,61 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F5F7FA;
+  --foreground: #1A202C;
+  --font-mono: 'SF Mono', 'Fira Code', monospace;
+  --ap-border: #CBD5E1;
+  --ap-muted: #64748B;
+  --ap-blue: #1565C0;
+  --ap-teal: #00695C;
+  --ap-red: #C62828;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* 의료 데이터 수치용 모노스페이스 */
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: 'tnum' 1;
+  letter-spacing: -0.02em;
 }
+
+/* Clinical card */
+.ap-card {
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid var(--ap-border);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Status badge */
+.ap-badge {
+  @apply inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-semibold tracking-wide uppercase;
+}
+
+/* Section label */
+.ap-label {
+  @apply text-xs font-semibold tracking-widest uppercase;
+  color: var(--ap-muted);
+}
+
+/* Score chip */
+.ap-score {
+  @apply font-mono text-2xl font-bold tabular-nums;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 2px; }

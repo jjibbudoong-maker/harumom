@@ -1,0 +1,88 @@
+<svg viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="하루몬 마스코트">
+  <defs>
+    <radialGradient id="bodyG" cx="38%" cy="30%" r="65%">
+      <stop offset="0%"   stop-color="#58BCA4"/>
+      <stop offset="55%"  stop-color="#4CAF96"/>
+      <stop offset="100%" stop-color="#36967E"/>
+    </radialGradient>
+    <radialGradient id="earInG" cx="50%" cy="50%" r="70%">
+      <stop offset="0%"   stop-color="#36967E"/>
+      <stop offset="100%" stop-color="#2E8470"/>
+    </radialGradient>
+    <radialGradient id="bellyG" cx="50%" cy="40%" r="60%">
+      <stop offset="0%"   stop-color="#2E8470" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#1a4a3a" stop-opacity="0.4"/>
+    </radialGradient>
+    <radialGradient id="eyeG" cx="35%" cy="30%" r="65%">
+      <stop offset="0%"   stop-color="#2a4a3a"/>
+      <stop offset="100%" stop-color="#1E2A27"/>
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-10%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#2E8470" flood-opacity="0.25"/>
+    </filter>
+    <filter id="ecgGlow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 바닥 그림자 -->
+  <ellipse cx="120" cy="270" rx="60" ry="9" fill="#2E8470" opacity="0.15"/>
+
+  <!-- 귀 -->
+  <ellipse cx="62"  cy="72" rx="22" ry="28" fill="#4CAF96" filter="url(#shadow)"/>
+  <ellipse cx="62"  cy="74" rx="12" ry="17" fill="url(#earInG)"/>
+  <ellipse cx="178" cy="72" rx="22" ry="28" fill="#4CAF96" filter="url(#shadow)"/>
+  <ellipse cx="178" cy="74" rx="12" ry="17" fill="url(#earInG)"/>
+
+  <!-- 몸통 -->
+  <ellipse cx="120" cy="195" rx="82" ry="78" fill="url(#bodyG)" filter="url(#shadow)"/>
+
+  <!-- 배 -->
+  <ellipse cx="120" cy="208" rx="50" ry="46" fill="url(#bellyG)"/>
+
+  <!-- ECG 라인 -->
+  <polyline
+    points="72,208  84,208  90,190  96,226  102,196  108,208  116,208  122,200  128,216  134,208  148,208"
+    stroke="rgba(255,255,255,0.75)" stroke-width="2.8" fill="none"
+    stroke-linecap="round" stroke-linejoin="round"
+    filter="url(#ecgGlow)"/>
+
+  <!-- 머리 -->
+  <circle cx="120" cy="118" r="68" fill="url(#bodyG)" filter="url(#shadow)"/>
+
+  <!-- 머리 하이라이트 -->
+  <ellipse cx="95" cy="88" rx="26" ry="16" fill="white" opacity="0.07" transform="rotate(-20,95,88)"/>
+
+  <!-- 눈 흰자 -->
+  <ellipse cx="98"  cy="110" rx="17" ry="19" fill="white"/>
+  <ellipse cx="142" cy="110" rx="17" ry="19" fill="white"/>
+
+  <!-- 눈동자 -->
+  <circle cx="101" cy="113" r="11" fill="url(#eyeG)"/>
+  <circle cx="145" cy="113" r="11" fill="url(#eyeG)"/>
+
+  <!-- 눈 하이라이트 -->
+  <circle cx="97"  cy="108" r="4.5" fill="white" opacity="0.95"/>
+  <circle cx="141" cy="108" r="4.5" fill="white" opacity="0.95"/>
+  <circle cx="106" cy="117" r="2"   fill="white" opacity="0.45"/>
+  <circle cx="150" cy="117" r="2"   fill="white" opacity="0.45"/>
+
+  <!-- 볼 홍조 -->
+  <ellipse cx="82"  cy="132" rx="15" ry="9" fill="#EF9A9A" opacity="0.3"/>
+  <ellipse cx="158" cy="132" rx="15" ry="9" fill="#EF9A9A" opacity="0.3"/>
+
+  <!-- 입 -->
+  <path d="M 105 142 Q 120 156 135 142"
+    stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+  <!-- 팔 -->
+  <ellipse cx="44"  cy="188" rx="20" ry="13" fill="#4CAF96" transform="rotate(-30,44,188)"  filter="url(#shadow)"/>
+  <circle  cx="32"  cy="200" r="10"           fill="#4CAF96"/>
+  <ellipse cx="196" cy="188" rx="20" ry="13" fill="#4CAF96" transform="rotate(30,196,188)"  filter="url(#shadow)"/>
+  <circle  cx="208" cy="200" r="10"           fill="#4CAF96"/>
+
+  <!-- 다리 -->
+  <ellipse cx="94"  cy="261" rx="26" ry="14" fill="#4CAF96" filter="url(#shadow)"/>
+  <ellipse cx="146" cy="261" rx="26" ry="14" fill="#4CAF96" filter="url(#shadow)"/>
+</svg>
