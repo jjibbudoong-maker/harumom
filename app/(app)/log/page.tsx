@@ -267,6 +267,7 @@ export default function LogPage() {
       }
       setLoading(false)
     })()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const toggleItem = (id: string, list: string[], setter: (v: string[]) => void) =>
