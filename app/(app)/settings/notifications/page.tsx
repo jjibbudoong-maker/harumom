@@ -88,24 +88,26 @@ export default function NotificationsPage() {
     setSaving(true)
     localStorage.setItem('harumom_med_times', JSON.stringify(medTimes))
 
-    if (!subscribed) {
+    // 기존 구독 먼저 확인 (subscribed 상태와 무관하게 실제 SW 구독을 조회)
+    let sub: PushSubscription | null = null
+    if ('serviceWorker' in navigator) {
+      const reg = await navigator.serviceWorker.getRegistration('/')
+      if (reg) sub = await reg.pushManager.getSubscription()
+    }
+
+    if (!sub) {
+      // 구독이 없으면 새로 구독
       const perm = await requestPermission()
-      setPermission(perm)
       if (perm !== 'granted') {
         setSaving(false)
-        return alert('알림 권한이 필요해요.')
+        return alert('알림 권한이 필요해요. 브라우저 설정에서 허용해주세요.')
       }
-      const sub = await subscribePush()
-      if (sub) {
-        setSubscribed(true)
-        await saveSubscription(sub, { remind_time: '21:00', med_times: medTimes })
-      }
-    } else {
-      const reg = await navigator.serviceWorker.getRegistration('/sw.js')
-      if (reg) {
-        const sub = await reg.pushManager.getSubscription()
-        if (sub) await saveSubscription(sub, { remind_time: '21:00', med_times: medTimes })
-      }
+      sub = await subscribePush()
+      if (sub) setSubscribed(true)
+    }
+
+    if (sub) {
+      await saveSubscription(sub, { remind_time: '21:00', med_times: medTimes })
     }
 
     scheduleMedAlerts(medTimes)
