@@ -65,7 +65,7 @@ function getDeviceGuide(): { title: string; steps: string[] } {
 
 export default function NotificationsPage() {
   const router = useRouter()
-  const [permission, setPermission] = useState<NotificationPermission>('default')
+  const [, setPermission] = useState<NotificationPermission>('default')
   const [subscribed, setSubscribed] = useState(false)
   const [medTimes, setMedTimes] = useState<string[]>([])
   const [saving, setSaving] = useState(false)
