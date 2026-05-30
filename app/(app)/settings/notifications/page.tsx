@@ -37,7 +37,8 @@ export default function NotificationsPage() {
       setPermission(Notification.permission)
     }
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistration('/sw.js').then(async (reg) => {
+      // getRegistration('/')로 스코프 기반 조회 — '/sw.js'로는 못 찾는 경우 있음
+      navigator.serviceWorker.getRegistration('/').then(async (reg) => {
         if (!reg) return
         const sub = await reg.pushManager.getSubscription()
         setSubscribed(!!sub)

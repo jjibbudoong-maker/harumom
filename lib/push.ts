@@ -61,7 +61,7 @@ export async function requestPermission(): Promise<NotificationPermission> {
 /** 현재 구독 해제 */
 export async function unsubscribePush(): Promise<boolean> {
   if (!('serviceWorker' in navigator)) return false;
-  const reg = await navigator.serviceWorker.getRegistration('/sw.js');
+  const reg = await navigator.serviceWorker.getRegistration('/');
   if (!reg) return false;
   const sub = await reg.pushManager.getSubscription();
   if (!sub) return true;
