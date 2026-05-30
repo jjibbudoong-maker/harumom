@@ -2,7 +2,7 @@
 
 export const dynamic = 'force-dynamic'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createBrowserSupabaseClient } from '@/lib/supabase/client'
 
@@ -26,6 +26,22 @@ export default function OnboardingProfilePage() {
   const [conditions, setConditions] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
 
+  // 기존 프로필 불러와서 미리채우기
+  useEffect(() => {
+    ;(async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return
+      const { data } = await supabase
+        .from('profiles')
+        .select('nickname, primary_conditions')
+        .eq('id', user.id)
+        .single()
+      if (data?.nickname) setNickname(data.nickname)
+      if (data?.primary_conditions?.length) setConditions(data.primary_conditions)
+    })()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   function toggleCondition(id: string) {
     setConditions(prev => prev.includes(id) ? prev.filter(c => c !== id) : [...prev, id])
   }
@@ -36,8 +52,9 @@ export default function OnboardingProfilePage() {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) { router.push('/auth/login'); return }
     await supabase.from('profiles').upsert({
-      id: user.id, nickname: nickname.trim(),
-      birth_year: birthYear ? parseInt(birthYear) : null, conditions,
+      id: user.id,
+      nickname: nickname.trim(),
+      primary_conditions: conditions,
     })
     setLoading(false)
     router.push('/onboarding/symptoms')
@@ -47,7 +64,6 @@ export default function OnboardingProfilePage() {
 
   return (
     <div className="min-h-screen bg-ap-surface">
-      {/* 헤더 */}
       <div className="bg-ap-navy px-6 pt-12 pb-6">
         <div className="flex gap-1.5 mb-5">
           <div className="flex-1 h-1 bg-ap-teal rounded-full" />
@@ -61,13 +77,10 @@ export default function OnboardingProfilePage() {
       <div className="px-6 py-6 space-y-5">
         <div>
           <label className="ap-label block mb-1.5">닉네임 *</label>
-          <input type="text" value={nickname} onChange={e => setNickname(e.target.value)}
+          <input type="text" value={nickname}
+            onChange={e => setNickname(e.target.value)}
+            onInput={e => setNickname((e.target as HTMLInputElement).value)}
             maxLength={20} placeholder="예: 건강한홍길동" className={inputCls} />
-        </div>
-        <div>
-          <label className="ap-label block mb-1.5">출생연도 (선택)</label>
-          <input type="number" value={birthYear} onChange={e => setBirthYear(e.target.value)}
-            min={1920} max={2010} placeholder="예: 1990" className={inputCls} />
         </div>
         <div>
           <label className="ap-label block mb-3">관리 중인 질환 (선택, 복수)</label>
