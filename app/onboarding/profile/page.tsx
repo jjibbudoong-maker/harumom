@@ -22,7 +22,6 @@ export default function OnboardingProfilePage() {
   const router = useRouter()
   const supabase = createBrowserSupabaseClient()
   const [nickname, setNickname] = useState('')
-  const [birthYear, setBirthYear] = useState('')
   const [conditions, setConditions] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
 
