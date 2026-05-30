@@ -85,8 +85,6 @@ export default function SignupPage() {
     )
   }
 
-  const canSubmit = nickname.trim() && email.includes('@') && password.length >= 8
-
   return (
     <div style={{ minHeight: '100vh', background: C.bg, display: 'flex', flexDirection: 'column' }}>
       {/* 헤더 */}
