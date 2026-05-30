@@ -34,6 +34,8 @@ export default function SignupPage() {
 
   async function handleSignup(e: React.FormEvent) {
     e.preventDefault()
+    if (!nickname.trim()) { setError('닉네임을 입력해주세요.'); return }
+    if (!email.includes('@')) { setError('올바른 이메일을 입력해주세요.'); return }
     if (password.length < 8) { setError('비밀번호는 8자 이상이어야 합니다.'); return }
     setLoading(true); setError(null)
     const { data, error: err } = await supabase.auth.signUp({
@@ -98,18 +100,24 @@ export default function SignupPage() {
         <form onSubmit={handleSignup} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
           <div>
             <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.inkFaint, marginBottom: 7 }}>닉네임</label>
-            <input type="text" value={nickname} onChange={e => setNickname(e.target.value)}
-              required maxLength={20} placeholder="예: 건강한홍길동" style={fieldStyle} />
+            <input type="text" value={nickname}
+              onChange={e => setNickname(e.target.value)}
+              onInput={e => setNickname((e.target as HTMLInputElement).value)}
+              maxLength={20} placeholder="예: 건강한홍길동" style={fieldStyle} />
           </div>
           <div>
             <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.inkFaint, marginBottom: 7 }}>이메일</label>
-            <input type="email" value={email} onChange={e => setEmail(e.target.value)}
-              required placeholder="example@email.com" autoComplete="email" style={fieldStyle} />
+            <input type="email" value={email}
+              onChange={e => setEmail(e.target.value)}
+              onInput={e => setEmail((e.target as HTMLInputElement).value)}
+              placeholder="example@email.com" autoComplete="email" style={fieldStyle} />
           </div>
           <div>
             <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.inkFaint, marginBottom: 7 }}>비밀번호 (8자 이상)</label>
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)}
-              required minLength={8} placeholder="••••••••" autoComplete="new-password" style={fieldStyle} />
+            <input type="password" value={password}
+              onChange={e => setPassword(e.target.value)}
+              onInput={e => setPassword((e.target as HTMLInputElement).value)}
+              placeholder="••••••••" autoComplete="new-password" style={fieldStyle} />
           </div>
 
           {error && (
@@ -118,14 +126,14 @@ export default function SignupPage() {
             </div>
           )}
 
-          <button type="submit" disabled={loading || !canSubmit} style={{
+          <button type="submit" disabled={loading} style={{
             width: '100%', padding: '15px 0', borderRadius: 16,
-            background: canSubmit && !loading ? C.mint : C.lineStrong,
-            color: canSubmit && !loading ? 'white' : C.inkFaint,
+            background: loading ? C.lineStrong : C.mint,
+            color: loading ? C.inkFaint : 'white',
             border: 'none', fontSize: 16, fontWeight: 700,
-            cursor: canSubmit && !loading ? 'pointer' : 'default',
+            cursor: loading ? 'default' : 'pointer',
             fontFamily: 'inherit', marginTop: 4,
-            boxShadow: canSubmit && !loading ? '0 6px 16px rgba(54,150,126,0.28)' : 'none',
+            boxShadow: loading ? 'none' : '0 6px 16px rgba(54,150,126,0.28)',
             transition: 'all .15s',
           }}>
             {loading ? '가입 중...' : '회원가입하기'}
