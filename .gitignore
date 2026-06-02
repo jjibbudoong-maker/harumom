@@ -34,3 +34,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+android/harumom-release.keystore
+android/keystore-base64.txt

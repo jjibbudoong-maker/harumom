@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.harumom.app",
+    "sha256_cert_fingerprints": [
+      "D2:25:19:57:80:D9:47:18:AE:6C:69:07:4F:E4:43:61:F4:9E:84:92:E6:79:3E:B6:AE:B5:CD:9A:45:1C:52:47"
+    ]
+  }
+}]

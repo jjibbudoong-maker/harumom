@@ -1,0 +1,36 @@
+{
+  "packageId": "com.harumom.app",
+  "host": "apeuni.vercel.app",
+  "name": "하루몸",
+  "launcherName": "하루몸",
+  "display": "standalone",
+  "themeColor": "#4CAF96",
+  "navigationColor": "#4CAF96",
+  "navigationColorDark": "#36967E",
+  "navigationDividerColor": "#4CAF96",
+  "navigationDividerColorDark": "#36967E",
+  "backgroundColor": "#F5F8F7",
+  "enableNotifications": true,
+  "startUrl": "/dashboard",
+  "iconUrl": "https://apeuni.vercel.app/icons/icon-512x512.png",
+  "maskableIconUrl": "https://apeuni.vercel.app/icons/icon-512x512.png",
+  "monochromeIconUrl": "https://apeuni.vercel.app/icons/icon-512x512.png",
+  "appVersion": "1",
+  "appVersionName": "1.0.0",
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://apeuni.vercel.app/manifest.json",
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://apeuni.vercel.app/",
+  "minSdkVersion": 19,
+  "orientation": "portrait",
+  "fingerprints": [{
+    "name": "harumom",
+    "value": "D2:25:19:57:80:D9:47:18:AE:6C:69:07:4F:E4:43:61:F4:9E:84:92:E6:79:3E:B6:AE:B5:CD:9A:45:1C:52:47"
+  }],
+  "signingKey": {
+    "path": "./harumom-release.keystore",
+    "alias": "harumom"
+  }
+}
