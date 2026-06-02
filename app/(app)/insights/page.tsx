@@ -56,11 +56,19 @@ export default function InsightsPage() {
               </svg>
             </div>
             <p className="text-ap-text font-semibold mb-1">아직 분석할 데이터가 부족합니다</p>
-            <p className="text-ap-muted text-xs mb-6 leading-relaxed">14일 이상 기록하면<br />패턴을 발견할 수 있습니다</p>
+            <p className="text-ap-muted text-xs mb-4 leading-relaxed">
+              14일 이상 꾸준히 기록하면<br />수면·기분·통증 간의 숨은 패턴을 발견할 수 있어요
+            </p>
+            <div className="flex gap-2 text-xs text-ap-muted mb-5">
+              {['기분', '에너지', '통증', '수면'].map(item => (
+                <span key={item} className="px-2.5 py-1 bg-ap-blue-lt text-ap-blue rounded-lg font-medium">{item}</span>
+              ))}
+            </div>
             <button onClick={() => generate()} disabled={isPending}
               className="bg-ap-blue text-white px-6 py-2.5 rounded-xl font-semibold text-sm disabled:opacity-40">
-              지금 분석하기
+              {isPending ? '분석 중...' : '지금 분석 시도하기'}
             </button>
+            <p className="text-xs text-ap-muted mt-2">데이터가 적으면 결과가 제한될 수 있어요</p>
           </div>
         ) : (
           <div className="space-y-3">

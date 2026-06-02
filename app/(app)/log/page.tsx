@@ -294,7 +294,7 @@ export default function LogPage() {
       if (data) setExisting(data.id)
     }
     setSaving(false)
-    router.push('/')
+    router.push('/?saved=1')
   }
 
   if (loading) return (

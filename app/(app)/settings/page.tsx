@@ -2,17 +2,38 @@
 
 export const dynamic = 'force-dynamic'
 
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createBrowserSupabaseClient } from '@/lib/supabase/client'
 
 export default function SettingsPage() {
   const router = useRouter()
   const supabase = createBrowserSupabaseClient()
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [deleting, setDeleting] = useState(false)
 
   async function handleLogout() {
     await supabase.auth.signOut()
     router.push('/auth/login')
     router.refresh()
+  }
+
+  async function handleDeleteAccount() {
+    setDeleting(true)
+    try {
+      const res = await fetch('/api/account/delete', { method: 'DELETE' })
+      if (res.ok) {
+        await supabase.auth.signOut()
+        router.push('/auth/login')
+      } else {
+        alert('계정 삭제에 실패했습니다. 잠시 후 다시 시도해주세요.')
+        setDeleting(false)
+        setShowDeleteConfirm(false)
+      }
+    } catch {
+      alert('오류가 발생했습니다.')
+      setDeleting(false)
+    }
   }
 
   const MENU_ITEMS = [
@@ -94,12 +115,41 @@ export default function SettingsPage() {
         </div>
       </div>
 
-      <div className="px-5 mt-5">
+      <div className="px-5 mt-5 space-y-3">
         <button onClick={handleLogout}
           className="w-full py-3.5 border border-ap-red/30 text-ap-red rounded-2xl font-semibold text-sm bg-ap-red-lt">
           로그아웃
         </button>
+        <button onClick={() => setShowDeleteConfirm(true)}
+          className="w-full py-3 text-ap-muted text-xs underline underline-offset-2">
+          계정 및 데이터 영구 삭제
+        </button>
       </div>
+
+      {/* 계정 삭제 확인 모달 */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-end justify-center p-4">
+          <div className="bg-white rounded-2xl p-6 w-full max-w-sm space-y-4">
+            <div className="text-center">
+              <div className="text-4xl mb-3">⚠️</div>
+              <h3 className="text-lg font-bold text-ap-text">계정을 삭제하시겠어요?</h3>
+              <p className="text-sm text-ap-muted mt-2 leading-relaxed">
+                모든 기록·증상·약물 데이터가 <strong>즉시 영구 삭제</strong>되며 복구할 수 없습니다.
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <button onClick={() => setShowDeleteConfirm(false)} disabled={deleting}
+                className="flex-1 py-3 border border-ap-border rounded-xl text-sm font-semibold text-ap-muted">
+                취소
+              </button>
+              <button onClick={handleDeleteAccount} disabled={deleting}
+                className="flex-1 py-3 bg-ap-red text-white rounded-xl text-sm font-semibold disabled:opacity-50">
+                {deleting ? '삭제 중...' : '영구 삭제'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
