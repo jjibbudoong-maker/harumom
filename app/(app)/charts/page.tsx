@@ -77,12 +77,12 @@ export default function ChartsPage() {
           </div>
         ) : (
           <div className="bg-white rounded-2xl p-4 border border-ap-border">
-            <p className="ap-label mb-3">점수 추이 (1–5점)</p>
+            <p className="ap-label mb-3">점수 추이 (1–10점)</p>
             <ResponsiveContainer width="100%" height={260}>
               <LineChart data={chartData} margin={{ top: 5, right: 5, left: -20, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
                 <XAxis dataKey="date" tick={{ fontSize: 10, fill: '#64748B' }} interval="preserveStartEnd" />
-                <YAxis domain={[1, 5]} ticks={[1,2,3,4,5]} tick={{ fontSize: 10, fill: '#64748B' }} />
+                <YAxis domain={[1, 10]} ticks={[1,2,3,4,5,6,7,8,9,10]} tick={{ fontSize: 10, fill: '#64748B' }} />
                 <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #CBD5E1' }} />
                 {LINE_CONFIG.map(({ key, label, color }) =>
                   visible[key] ? (
