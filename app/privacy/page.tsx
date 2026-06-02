@@ -8,7 +8,7 @@ export default function PrivacyPage() {
 
       <section style={{ marginBottom: 32 }}>
         <h2 style={{ fontSize: 18, fontWeight: 700, borderBottom: '2px solid #4CAF96', paddingBottom: 8, marginBottom: 16 }}>1. 수집하는 개인정보</h2>
-        <p>하루몸(이하 "서비스")은 아래 정보를 수집합니다.</p>
+        <p>하루몸(이하 &ldquo;서비스&rdquo;)은 아래 정보를 수집합니다.</p>
         <ul style={{ paddingLeft: 20, marginTop: 12 }}>
           <li><strong>계정 정보</strong>: 이메일 주소, 닉네임</li>
           <li><strong>건강 기록</strong>: 기분·에너지·통증·수면 점수, 증상, 복용 약물, 메모</li>
