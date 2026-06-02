@@ -334,10 +334,10 @@ export default function LogPage() {
         <ExercisePicker value={exercise} onChange={setExercise} />
 
         {/* ── 복약 확인 ── */}
-        {medications.length > 0 && (
-          <div style={{ background:'white', borderRadius:16, padding:16, border:`1px solid ${C.border}` }}>
-            <p style={{ fontWeight:700, fontSize:14, color:C.text, margin:'0 0 2px' }}>복약 확인</p>
-            <p style={{ fontSize:11, color:C.muted, margin:'0 0 12px' }}>오늘 복용한 약을 선택하세요</p>
+        <div style={{ background:'white', borderRadius:16, padding:16, border:`1px solid ${C.border}` }}>
+          <p style={{ fontWeight:700, fontSize:14, color:C.text, margin:'0 0 2px' }}>💊 복약 확인</p>
+          <p style={{ fontSize:11, color:C.muted, margin:'0 0 12px' }}>오늘 복용한 약을 선택하세요</p>
+          {medications.length > 0 ? (
             <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
               {medications.map(m => (
                 <button key={m.id}
@@ -354,16 +354,25 @@ export default function LogPage() {
                 </button>
               ))}
             </div>
-          </div>
-        )}
+          ) : (
+            <div style={{ textAlign:'center', padding:'8px 0' }}>
+              <p style={{ fontSize:12, color:C.muted, marginBottom:10 }}>등록된 약물이 없어요</p>
+              <button onClick={() => router.push('/settings/medications')}
+                style={{ fontSize:12, fontWeight:700, color:C.teal, background:C.tealLt,
+                  border:`1px solid ${C.teal}`, borderRadius:8, padding:'6px 16px', cursor:'pointer' }}>
+                + 약물 등록하러 가기
+              </button>
+            </div>
+          )}
+        </div>
 
         {/* ── 오늘의 증상 ── */}
-        {symptoms.length > 0 && (
-          <div style={{ background:'white', borderRadius:16, padding:16, border:`1px solid ${C.border}` }}>
-            <p style={{ fontWeight:700, fontSize:14, color:C.text, margin:'0 0 2px' }}>오늘의 증상</p>
-            <p style={{ fontSize:11, color:C.muted, margin:'0 0 12px' }}>
-              지금 느껴지는 증상을 선택하세요 (없으면 패스)
-            </p>
+        <div style={{ background:'white', borderRadius:16, padding:16, border:`1px solid ${C.border}` }}>
+          <p style={{ fontWeight:700, fontSize:14, color:C.text, margin:'0 0 2px' }}>🩺 오늘의 증상</p>
+          <p style={{ fontSize:11, color:C.muted, margin:'0 0 12px' }}>
+            지금 느껴지는 증상을 선택하세요 (없으면 패스)
+          </p>
+          {symptoms.length > 0 ? (
             <div style={{ display:'flex', flexWrap:'wrap', gap:8 }}>
               {symptoms.map(s => (
                 <button key={s.id}
@@ -379,8 +388,17 @@ export default function LogPage() {
                 </button>
               ))}
             </div>
-          </div>
-        )}
+          ) : (
+            <div style={{ textAlign:'center', padding:'8px 0' }}>
+              <p style={{ fontSize:12, color:C.muted, marginBottom:10 }}>추적할 증상이 없어요</p>
+              <button onClick={() => router.push('/settings/symptoms')}
+                style={{ fontSize:12, fontWeight:700, color:C.red, background:C.redLt,
+                  border:`1px solid ${C.red}`, borderRadius:8, padding:'6px 16px', cursor:'pointer' }}>
+                + 증상 등록하러 가기
+              </button>
+            </div>
+          )}
+        </div>
 
         {/* ── 메모 ── */}
         <div style={{ background:'white', borderRadius:16, padding:16, border:`1px solid ${C.border}` }}>
