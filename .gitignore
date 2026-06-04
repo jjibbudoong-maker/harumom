@@ -36,3 +36,5 @@ yarn-error.log*
 next-env.d.ts
 android/harumom-release.keystore
 android/keystore-base64.txt
+android/pwabuilder-package/
+*.keystore
