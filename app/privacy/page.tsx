@@ -21,7 +21,7 @@ export default function PrivacyPage() {
         <h2 style={{ fontSize: 18, fontWeight: 700, borderBottom: '2px solid #4CAF96', paddingBottom: 8, marginBottom: 16 }}>2. 정보 이용 목적</h2>
         <ul style={{ paddingLeft: 20 }}>
           <li>건강 기록 저장 및 트렌드 분석 제공</li>
-          <li>AI 기반 건강 패턴 인사이트 생성</li>
+          <li>통계 분석(상관관계) 기반 건강 패턴 인사이트 생성</li>
           <li>기록 리마인더 및 복약 알림 발송</li>
           <li>서비스 품질 개선</li>
         </ul>
@@ -38,7 +38,6 @@ export default function PrivacyPage() {
         <ul style={{ paddingLeft: 20, marginTop: 12 }}>
           <li><strong>Supabase Inc.</strong> — 데이터베이스 및 인증 (미국)</li>
           <li><strong>Vercel Inc.</strong> — 서버 호스팅 (미국)</li>
-          <li><strong>OpenAI Inc.</strong> — AI 인사이트 생성 (미국)</li>
         </ul>
       </section>
 

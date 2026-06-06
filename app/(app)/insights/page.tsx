@@ -13,6 +13,15 @@ const CORRELATION_STYLE: Record<string, { card: string; badge: string; label: st
   strong_negative:   { card: 'border-l-ap-red bg-ap-red-lt',     badge: 'bg-ap-red text-white',      label: '강한 음의 상관' },
 }
 
+const FACTOR_LABELS: Record<string, string> = {
+  sleep_hours: '수면 시간',
+  mood_score: '기분',
+  energy_score: '에너지',
+  pain_score: '통증',
+  water_ml: '수분 섭취',
+}
+const factorLabel = (k: string): string => FACTOR_LABELS[k] ?? k
+
 function getCorrelationKey(r: number): string {
   const abs = Math.abs(r)
   if (abs >= 0.7) return r > 0 ? 'strong_positive' : 'strong_negative'
@@ -80,11 +89,11 @@ export default function InsightsPage() {
                   <div className="flex items-center justify-between mb-2.5">
                     <div className="flex items-center gap-1.5 flex-wrap">
                       <span className="text-xs px-2 py-0.5 bg-white rounded-md text-ap-text font-medium border border-ap-border">
-                        {ins.factor_a}
+                        {factorLabel(ins.factor_a)}
                       </span>
                       <span className="text-ap-muted text-xs">↔</span>
                       <span className="text-xs px-2 py-0.5 bg-white rounded-md text-ap-text font-medium border border-ap-border">
-                        {ins.factor_b}
+                        {factorLabel(ins.factor_b)}
                       </span>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0 ml-2">
