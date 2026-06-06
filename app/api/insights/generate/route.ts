@@ -26,9 +26,9 @@ export async function GET() {
 
   const { data: rows } = await supabase
     .from('ai_insights')
-    .select('insight_type, insight_text, correlation_r, generated_at')
+    .select('insight_type, insight_text, factor_a, factor_b, correlation_r, created_at')
     .eq('user_id', session.user.id)
-    .order('generated_at', { ascending: false })
+    .order('created_at', { ascending: false })
 
   const insights: StoredInsight[] = (rows ?? []).map((row: Record<string, unknown>) => {
     const parts = (row.insight_type as string).split('_')
@@ -38,13 +38,13 @@ export async function GET() {
 
     return {
       id: row.insight_type as string,
-      factor_a: parts[0] ?? '',
-      factor_b: parts[1] ?? '',
+      factor_a: (row.factor_a as string) || (parts[0] ?? ''),
+      factor_b: (row.factor_b as string) || (parts[1] ?? ''),
       correlation: typeof row.correlation_r === 'number' ? row.correlation_r : 0,
       message: (parsed.message ?? row.insight_text) as string,
       emoji: parsed.emoji ?? '📊',
       title: parsed.title ?? '',
-      created_at: row.generated_at as string,
+      created_at: row.created_at as string,
     }
   })
 
@@ -100,16 +100,19 @@ export async function POST() {
     const rows = cards.map(c => ({
       user_id: session.user.id,
       insight_type: c!.card.id,
+      factor_a: c!.a,
+      factor_b: c!.b,
       correlation_r: c!.r,
+      correlation_coef: c!.r,
       insight_text: JSON.stringify({
         message: c!.card.body,
         emoji: c!.card.emoji,
         title: c!.card.title,
       }),
-      generated_at: new Date().toISOString(),
     }))
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    await supabase.from('ai_insights').upsert(rows as any, { onConflict: 'user_id,insight_type' })
+    const { error: upsertErr } = await supabase.from('ai_insights').upsert(rows as any, { onConflict: 'user_id,factor_a,factor_b' })
+    if (upsertErr) console.error('[insights] upsert failed:', upsertErr.message)
   }
 
   const insights: StoredInsight[] = cards.map(c => ({
